@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">application</string>
+    <string name="app_name">Proyecto</string>
+    <string name="saludo" translatable="false">Buenos dias</string>
+    <color name="txtColor">#E91E63</color>
+    <color name="bgColor">#FF03DAC5</color>
 </resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Proyecto</string>
+    <string name="saludo" translatable="false">Land 2</string>
+    <color name="txtColor">#EE00FF</color>
+    <color name="bgColor">#FF0000</color>
+</resources>
