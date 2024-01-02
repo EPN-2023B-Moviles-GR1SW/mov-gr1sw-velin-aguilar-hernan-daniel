@@ -60,7 +60,7 @@ fun main(){
     }
 
     //it -> elemento iterado
-    arregloDinamico.forEach(println(it))
+    //arregloDinamico.forEach(println(it))
 
     arregloEstatico.forEachIndexed(){ indice : Int, valorActual ->
         println("Valor Actual : ${valorActual} Indice : ${indice}")

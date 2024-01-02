@@ -3,4 +3,9 @@
     <string name="saludo" translatable="false">Buenos dias</string>
     <color name="txtColor">#E91E63</color>
     <color name="bgColor">#FF03DAC5</color>
+    <string-array name="string_array_opciones_dialogo">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miercoles</item>
+    </string-array>
 </resources>
