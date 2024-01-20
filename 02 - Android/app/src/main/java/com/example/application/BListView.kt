@@ -99,11 +99,7 @@ class BListView : AppCompatActivity() {
         builder.setMultiChoiceItems(
             opciones,
             seleccionPrevia,
-            {
-                dialog,
-                which,
-                isChecked -> mostrarSnackBar("Dio click en el item ${which}")
-            }
+            { dialog, which, isChecked -> mostrarSnackBar("Dio click en el item ${which}") }
         )
         val dialogo = builder.create()
         dialogo.show()

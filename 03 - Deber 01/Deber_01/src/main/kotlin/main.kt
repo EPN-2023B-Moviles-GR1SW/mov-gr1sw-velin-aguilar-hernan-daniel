@@ -30,7 +30,7 @@ fun main()
 
 fun menuIngredientes(){
     var opcionMenu = -1
-
+    print("\u001b[H\u001b[2J")
     println("Qué deseas hacer?")
     println("1 Ver Registros de Ingredientes")
     println("2 Agregar Registro de Ingrediente")
