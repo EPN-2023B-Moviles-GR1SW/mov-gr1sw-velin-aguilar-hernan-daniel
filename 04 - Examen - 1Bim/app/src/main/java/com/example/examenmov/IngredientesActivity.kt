@@ -13,9 +13,13 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.examen.models.Ingrediente
 import com.example.examen.models.ManejadorReceta
+import com.example.examen.models.Receta
 import com.example.examenmov.models.BaseAdapterIngrediente
 
 class IngredientesActivity : AppCompatActivity() {
+    var ingredientes:MutableList<Ingrediente>? = null
+    var receta : Receta? = null
+    var ingredienteEliminar : Ingrediente? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ingredientes)
@@ -30,7 +34,7 @@ class IngredientesActivity : AppCompatActivity() {
         val id: Int? = intent.extras?.getInt("id")
 
         val lista = ManejadorReceta.obtenerLista()
-
+        receta = lista[id]
 
         val nombre = lista[id]?.nombre
         val precio = lista[id]?.precio
@@ -38,7 +42,7 @@ class IngredientesActivity : AppCompatActivity() {
         //val id: String = intent.extras?.getString("id").orEmpty()
         tvResult.text = "$nombre $precio"
 
-        val ingredientes:MutableList<Ingrediente>? = lista[id]?.obtenerIngredientes()
+        ingredientes = lista[id]?.obtenerIngredientes()
         Log.i("receta", ingredientes.toString())
 
         if(ingredientes?.isNotEmpty() == true){
@@ -58,7 +62,7 @@ class IngredientesActivity : AppCompatActivity() {
 
         val btnNuevaNota = findViewById<Button>(R.id.btn_nueva_cal)
         btnNuevaNota.setOnClickListener {
-            val intend = Intent(this, CrearNotaActivity::class.java)
+            val intend = Intent(this, CrearIngredienteActivity::class.java)
             intend.putExtra("id", id)
             startActivity(intend)
         }
@@ -75,6 +79,9 @@ class IngredientesActivity : AppCompatActivity() {
                 }
 
                 R.id.opc2 -> {
+                    receta?.ingredientes?.removeAt(position)
+                    val intend = Intent(this, MainActivity::class.java)
+                    startActivity(intend)
                     Toast.makeText(this, "Ingrediente Eliminado", Toast.LENGTH_SHORT).show()
                     true
                 }

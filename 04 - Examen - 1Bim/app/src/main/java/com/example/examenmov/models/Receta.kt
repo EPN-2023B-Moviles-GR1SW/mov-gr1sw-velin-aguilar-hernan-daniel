@@ -32,14 +32,12 @@ class Receta(
 
     }
 
-    // Método para agregar una calificación
-    fun agregarIngrediente(nombre: String, precioPorKilo: Double, caloriasPorKilo : Int) {
-        val nuevoIngrediente = Ingrediente(precioPorKilo, null, nombre ,caloriasPorKilo)
+    fun agregarIngrediente(nombre: String, precioPorKilo: Double, caloriasPorKilo : Int, importado : Boolean) {
+        val nuevoIngrediente = Ingrediente(precioPorKilo, nombre ,caloriasPorKilo, importado)
         ingredientes.add(nuevoIngrediente)
-        println("Ingrediente agregado: Ingrediente: $nombre, Precio: $precioPorKilo")
+        println("Ingrediente agregado: Ingrediente: $nombre, Precio: $precioPorKilo, Es importado: $importado")
     }
 
-    // Método para editar una calificación por materia
     fun editarIngrediente(nombre: String, nuevoPrecio: Double) {
         val ingrediente = ingredientes.find { it.nombre == nombre }
         if (ingrediente != null) {
@@ -50,7 +48,6 @@ class Receta(
         }
     }
 
-    // Método para eliminar una calificación por materia
     fun eliminarIngrediente(nombre: String) {
         val ingrediente = ingredientes.find { it.nombre == nombre }
         if (ingrediente != null) {

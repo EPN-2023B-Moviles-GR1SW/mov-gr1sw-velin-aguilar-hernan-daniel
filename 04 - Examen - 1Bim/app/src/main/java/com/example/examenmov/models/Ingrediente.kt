@@ -9,12 +9,12 @@ class Ingrediente(
     val caloriasPorKilo: Int?,
     var fechaCaducidad: Date?
 ) {
-    constructor(precioPorKilo: Double, esImportado: Boolean?, nombre: String, caloriasPorKilo: Int?) : this(
+    constructor(precioPorKilo: Double, nombre: String, caloriasPorKilo: Int?, esImportado: Boolean?) : this(
         precioPorKilo,
         esImportado,
         nombre,
         caloriasPorKilo,
         Date()
     )
-    constructor() : this(0.0, false,"pendiente",0,)
+    constructor() : this(0.0,"pendiente",0, false)
 }

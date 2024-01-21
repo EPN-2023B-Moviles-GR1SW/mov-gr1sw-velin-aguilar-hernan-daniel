@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.Toast
 import com.example.examen.models.ManejadorReceta
 import com.google.android.material.textfield.TextInputEditText
@@ -13,7 +14,7 @@ class RecetaRegistros : AppCompatActivity() {
     lateinit var inputNombre:TextInputEditText
     lateinit var inputApellido:TextInputEditText
     lateinit var inputCurso:TextInputEditText
-    lateinit var inputParalelo:TextInputEditText
+    lateinit var inputPlatoTemporada:CheckBox
     lateinit var inputDiaCum:TextInputEditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +26,7 @@ class RecetaRegistros : AppCompatActivity() {
         btnCrear.setOnClickListener {
             if(verificarDatos()){
                 ManejadorReceta.agregarReceta(inputNombre.text.toString(),inputApellido.text.toString().toFloat())
-                Toast.makeText(this, "Estudiante Creado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Receta Creada", Toast.LENGTH_SHORT).show()
                 val intend = Intent(this, MainActivity::class.java)
                 startActivity(intend)
             }else{
@@ -39,7 +40,7 @@ class RecetaRegistros : AppCompatActivity() {
         inputNombre= findViewById(R.id.input_nombre)
         inputApellido = findViewById(R.id.input_precio)
         inputCurso = findViewById(R.id.input_porciones)
-        inputParalelo = findViewById(R.id.input_paralelo)
+        inputPlatoTemporada = findViewById(R.id.input_platoTemporada)
         inputDiaCum = findViewById(R.id.input_agregacion)
     }
     fun verificarDatos(): Boolean {

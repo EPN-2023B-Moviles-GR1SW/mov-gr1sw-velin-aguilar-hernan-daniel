@@ -41,9 +41,9 @@ class BaseAdapterIngrediente(private val context: Context, private val datos: Mu
         tv_ingrediente?.text = "${datos[position]?.nombre.toString()}:"
         tv_nota?.text = datos[position]?.precioPorKilo.toString()
         if (datos[position]?.esImportado == true){
-            tv_sipasa?.text = "Pasa"
+            tv_sipasa?.text = "Importado"
         }else{
-            tv_sipasa?.text = "No Pasa"
+            tv_sipasa?.text = "No Importado"
         }
 
         return vista!!

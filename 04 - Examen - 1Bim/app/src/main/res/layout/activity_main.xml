@@ -23,7 +23,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="Registrar receta" />
+        android:text="Registrar receta"
+        android:textColorHighlight="#4CAF50"
+        android:textColorLink="#4CAF50" />
+
+    <Button
+        android:id="@+id/btn_cerrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salir" />
 
     <View
         android:layout_width="match_parent"

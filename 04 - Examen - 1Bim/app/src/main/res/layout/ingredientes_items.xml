@@ -8,12 +8,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_nota"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/pastelCoral"
+        app:cardBackgroundColor="@color/pastelGreen"
         app:cardCornerRadius="8dp"
-        app:cardUseCompatPadding="true"
         app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
         app:contentPadding="16dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -41,7 +41,7 @@
                 android:id="@+id/tv_sipasa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="si pasa"
+                android:text="Importado?"
                 android:textSize="20sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

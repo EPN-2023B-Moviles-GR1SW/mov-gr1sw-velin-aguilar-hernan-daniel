@@ -4,15 +4,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.Toast
 import com.example.examen.models.ManejadorReceta
 import com.google.android.material.textfield.TextInputEditText
 
-class CrearNotaActivity : AppCompatActivity() {
+class CrearIngredienteActivity : AppCompatActivity() {
 
     lateinit var inputValor: TextInputEditText
     lateinit var inputMateria: TextInputEditText
     lateinit var inputCodMateria: TextInputEditText
+    lateinit var inputIngredienteImportado: CheckBox
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrar_ingrediente)
@@ -29,9 +31,10 @@ class CrearNotaActivity : AppCompatActivity() {
     }
 
     fun obtenerDatos(){
-        inputValor = findViewById(R.id.input_valor)
-        inputMateria = findViewById(R.id.input_materia)
-        inputCodMateria = findViewById(R.id.input_codMateria)
+        inputValor = findViewById(R.id.input_precio_ingrediente)
+        inputMateria = findViewById(R.id.input_Ingrediente)
+        inputCodMateria = findViewById(R.id.input_caloriasIngrediente)
+        inputIngredienteImportado = findViewById(R.id.cb_ingrediente_importado)
     }
     fun logicaCrear(){
         val id: Int = intent.extras?.getInt("id")!!
@@ -42,6 +45,7 @@ class CrearNotaActivity : AppCompatActivity() {
         var precio: Double = 0.0
         val nombre = inputMateria.text.toString()
         val cod = inputCodMateria.text.toString()
+        val importado = inputIngredienteImportado.isChecked
         var codMat: Int = 0
 
 
@@ -49,7 +53,7 @@ class CrearNotaActivity : AppCompatActivity() {
             precio= inputNota.toDoubleOrNull()!!
             codMat = cod.toInt()
             if (precio != null) {
-                lista[id]?.agregarIngrediente(nombre, precio, codMat)
+                lista[id]?.agregarIngrediente(nombre, precio, codMat, importado)
                 Toast.makeText(this," Ingrediente Creado", Toast.LENGTH_SHORT).show()
                 val intend = Intent(this, MainActivity::class.java)
                 startActivity(intend)

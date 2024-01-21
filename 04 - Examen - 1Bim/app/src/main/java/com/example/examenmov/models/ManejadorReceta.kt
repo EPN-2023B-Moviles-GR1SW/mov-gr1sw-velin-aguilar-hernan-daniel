@@ -8,25 +8,25 @@ import java.io.ObjectOutputStream
 
 public class ManejadorReceta {
     companion object {
-        val listaIngredientes: MutableMap<Int, Receta> = mutableMapOf()
+        val listaRecetas: MutableMap<Int, Receta> = mutableMapOf()
 
         init {
-            //cargarDatos()
-            agregarReceta("Salmon",10.2F, 145)
-            agregarReceta("Queso",3.4F, 145)
-            listaIngredientes[1]?.agregarIngrediente("Pan",5.2, 145)
+            cargarDatos()
+            //agregarReceta("Salmon",10.2F, 145)
+            //agregarReceta("Queso",3.4F, 145)
+            //listaRecetas[1]?.agregarIngrediente("Pan",5.2, 145, false)
 
         }
         fun obtenerLista(): MutableMap<Int, Receta> {
-            return listaIngredientes
+            return listaRecetas
         }
         fun agregarReceta(
             nombre:String, precio: Float, porcionesPorPlato: Int =1,
             paralelo:String="Por editar", diaCum: Int? =null) {
             val receta = Receta(nombre,precio,porcionesPorPlato)
-            if (!listaIngredientes.containsValue(receta)) {
-                val newKey = if (listaIngredientes.isEmpty()) 1 else listaIngredientes.keys.maxOrNull()!! + 1
-                listaIngredientes[newKey] = receta
+            if (!listaRecetas.containsValue(receta)) {
+                val newKey = if (listaRecetas.isEmpty()) 1 else listaRecetas.keys.maxOrNull()!! + 1
+                listaRecetas[newKey] = receta
                 println("Se agrego la receta")
             } else {
                 println("ERROR! Estudiante ya existente")
@@ -35,7 +35,7 @@ public class ManejadorReceta {
         }
 
         fun obtenerIdReceta(nombre: String, precio: Float): List<Int> {
-            val idsEncontrados = listaIngredientes.entries
+            val idsEncontrados = listaRecetas.entries
                 .filter { it.value.nombre == nombre || it.value.precio == precio  }
                 .map { it.key }
 
@@ -55,7 +55,7 @@ public class ManejadorReceta {
                          nuevoNombre: String? = null,
                          nuevoApellido: String? = null,
                          nuevoCurso: Int? = null) {
-            val receta = listaIngredientes[idReceta]
+            val receta = listaRecetas[idReceta]
 
             if (receta != null) {
                 // Actualizar solo los campos proporcionados
@@ -69,34 +69,20 @@ public class ManejadorReceta {
             }
         }
 
-        fun eliminarEstudiante(idEstudiante: Int) {
-            if (listaIngredientes.containsKey(idEstudiante)) {
-                listaIngredientes.remove(idEstudiante)
-                //guardarDatos()
+        fun eliminarReceta(idEstudiante: Int) {
+            if (listaRecetas.containsKey(idEstudiante)) {
+                listaRecetas.remove(idEstudiante)
+                guardarDatos()
             } else {
                 println("Error: El estudiante a eliminar no existe.")
-            }
-        }
-
-        fun verListaEstudiantes() {
-            println("Lista de Recetas y sus ingredientes:")
-            for ((key, receta) in listaIngredientes) {
-                println("Receta-ID:${key}: ${receta.nombre} ${receta.precio}")
-                if (receta.ingredientes.isNotEmpty()){
-                    receta.verIngredientes()
-                }
-                else{
-                    println("Sin ingredientes")
-                }
-
             }
         }
 
 
         private fun guardarDatos() {
             ObjectOutputStream(FileOutputStream("datos.txt")).use {
-                it.writeObject(listaIngredientes)
-                it.writeObject(listaIngredientes)
+                it.writeObject(listaRecetas)
+                it.writeObject(listaRecetas)
             }
         }
 
@@ -105,11 +91,10 @@ public class ManejadorReceta {
                 ObjectInputStream(FileInputStream("datos.txt")).use {
                     val estudiantesGuardados = it.readObject() as MutableMap<Int, Receta>
 
-                    listaIngredientes.putAll(estudiantesGuardados)
+                    listaRecetas.putAll(estudiantesGuardados)
 
                 }
             } catch (e: FileNotFoundException) {
-                // Manejar la excepción si el archivo no existe (primera ejecución)
             }
         }
     }

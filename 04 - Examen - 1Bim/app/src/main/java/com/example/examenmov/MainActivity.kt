@@ -39,13 +39,17 @@ class MainActivity : AppCompatActivity() {
             // Muestra el menú contextual
             showPopupMenu(menuIcon, position + 1, miadapter )
         }
-        val btnCrearEstudiante = findViewById<Button>(R.id.btn_crear_nuevo)
+        val btnCrearReceta = findViewById<Button>(R.id.btn_crear_nuevo)
 
-        btnCrearEstudiante.setOnClickListener {
+        btnCrearReceta.setOnClickListener {
             val intend = Intent(this, RecetaRegistros::class.java)
             startActivity(intend)
         }
 
+        val closeButton: Button = findViewById(R.id.btn_cerrar)
+        closeButton.setOnClickListener {
+            finish()
+        }
 
     }
     fun showPopupMenu(view: View, position: Int, miadapter: CustomBaseAdapter) {
@@ -55,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
                 R.id.opcion1 -> {
+                    println("confirmado")
                     val intend = Intent(this, RecetaEditActivity::class.java)
                     Log.i("iddd", position.toString())
                     intend.putExtra("id", position)
@@ -69,15 +74,14 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.opcion3 -> {
-                    ManejadorReceta.eliminarEstudiante(position)
-                    Toast.makeText(this, "Estudiante Eliminado", Toast.LENGTH_SHORT).show()
+                    ManejadorReceta.eliminarReceta(position)
+                    Toast.makeText(this, "Ingrediente Eliminado", Toast.LENGTH_SHORT).show()
                     miadapter.notifyDataSetChanged()
                     true
                 }
                 else -> false
             }
         }
-
         popupMenu.show()
     }
 

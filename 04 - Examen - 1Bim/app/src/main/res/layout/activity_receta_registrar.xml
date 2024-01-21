@@ -26,10 +26,11 @@
         android:id="@+id/btn_crear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Crear"
-        android:textSize="20dp"
-        android:textStyle="bold"
         android:layout_marginTop="15dp"
-        />
+        android:text="Crear"
+        android:textColorHighlight="#4CAF50"
+        android:textColorLink="#4CAF50"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

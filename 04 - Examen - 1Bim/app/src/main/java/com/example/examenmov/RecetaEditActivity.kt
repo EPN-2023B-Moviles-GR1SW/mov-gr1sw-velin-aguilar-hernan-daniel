@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.Toast
 import com.example.examen.models.ManejadorReceta
 import com.google.android.material.textfield.TextInputEditText
@@ -13,11 +14,12 @@ class RecetaEditActivity : AppCompatActivity() {
 
     lateinit var inputNombre: TextInputEditText
     lateinit var inputPrecio: TextInputEditText
-    lateinit var inputParalelo: TextInputEditText
+    lateinit var inputPlatoTemporada: CheckBox
     lateinit var inputPorciones: TextInputEditText
     lateinit var inputDiaCum: TextInputEditText
 
     var id: Int = 0
+    var modo : Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editar_receta)
@@ -36,7 +38,7 @@ class RecetaEditActivity : AppCompatActivity() {
                     println(e)
                 }
 
-                Toast.makeText(this, "Estudiante Editado Correctamente", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Receta Editada Correctamente", Toast.LENGTH_SHORT).show()
                 val intend = Intent(this, MainActivity::class.java)
                 startActivity(intend)
             }else{
@@ -49,15 +51,15 @@ class RecetaEditActivity : AppCompatActivity() {
     fun ponerDatos(){
         inputNombre= findViewById(R.id.input_nombre)
         inputPrecio = findViewById(R.id.input_precio)
-        inputParalelo = findViewById(R.id.input_paralelo)
+        inputPlatoTemporada = findViewById(R.id.input_platoTemporada)
         inputPorciones = findViewById(R.id.input_porciones)
         inputDiaCum = findViewById(R.id.input_agregacion)
 
         val lista = ManejadorReceta.obtenerLista()
         inputNombre.setText(lista[id]!!.nombre)
         inputPrecio.setText(lista[id]!!.precio.toString())
-        lista[id]!!.esPlatoTemporada?.let { inputParalelo.setText(it.toString()) }
-        inputPorciones.setText(lista[id]!!.porcionesPlato)
+        lista[id]!!.esPlatoTemporada?.let { inputPlatoTemporada.isChecked }
+        inputPorciones.setText(lista[id]!!.porcionesPlato.toString())
         lista[id]!!.fechaAgregacionMenu?.let { inputDiaCum.setText(it.toString()) }
 
     }
