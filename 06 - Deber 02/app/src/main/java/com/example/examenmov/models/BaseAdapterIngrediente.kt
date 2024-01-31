@@ -15,17 +15,14 @@ class BaseAdapterIngrediente(private val context: Context, private val datos: Mu
         return datos.size
     }
 
-    // Retorna el objeto en la posición especificada en tu conjunto de datos
     override fun getItem(position: Int): Ingrediente? {
         return datos[position]
     }
 
-    // Retorna el ID asociado con el objeto en la posición especificada
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
-    // Crea y retorna una vista para cada elemento en el conjunto de datos
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var vista = convertView
         if (vista == null) {
@@ -34,7 +31,6 @@ class BaseAdapterIngrediente(private val context: Context, private val datos: Mu
             vista = inflater.inflate(R.layout.ingredientes_items, null)
         }
 
-        // Personaliza la vista con los datos del elemento en la posición actual
         val tv_nota = vista?.findViewById<TextView>(R.id.tv_precio_ingrediente)
         val tv_ingrediente = vista?.findViewById<TextView>(R.id.tv_ingrediente)
         val tv_sipasa = vista?.findViewById<TextView>(R.id.tv_sipasa)

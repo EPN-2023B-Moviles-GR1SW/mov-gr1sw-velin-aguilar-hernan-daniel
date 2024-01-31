@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Toast
-import com.example.examen.models.ManejadorReceta
 import com.google.android.material.textfield.TextInputEditText
 
 class CrearIngredienteActivity : AppCompatActivity() {
@@ -24,8 +23,6 @@ class CrearIngredienteActivity : AppCompatActivity() {
         btnCrear.setOnClickListener {
             logicaCrear()
         }
-
-
     }
 
     fun obtenerDatos(){
@@ -65,6 +62,5 @@ class CrearIngredienteActivity : AppCompatActivity() {
         } catch (e: NumberFormatException) {
             println(e)
         }
-
     }
 }

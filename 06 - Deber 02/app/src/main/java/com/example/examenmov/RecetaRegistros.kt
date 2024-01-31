@@ -47,7 +47,6 @@ class RecetaRegistros : AppCompatActivity() {
             }else{
                 Toast.makeText(this, "Complete los datos", Toast.LENGTH_SHORT).show()
             }
-
         }
 
     }

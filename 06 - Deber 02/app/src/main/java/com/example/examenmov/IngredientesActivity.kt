@@ -12,7 +12,6 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import com.example.examen.models.Ingrediente
-import com.example.examen.models.ManejadorReceta
 import com.example.examen.models.Receta
 import com.example.examenmov.models.BaseAdapterIngrediente
 
@@ -25,7 +24,6 @@ class IngredientesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_ingredientes)
 
         initProgram()
-
     }
 
     fun initProgram(){
@@ -44,7 +42,6 @@ class IngredientesActivity : AppCompatActivity() {
             tvResult.text = "$nombre $precio"
 
             ingredientes = EBaseDatos.tablaIngrediente?.consultarIngredientes(key);
-            //ingredientes = lista[key]?.obtenerIngredientes()
             Log.i("receta", ingredientes.toString())
 
             if (ingredientes?.isNotEmpty() == true) {
@@ -56,7 +53,7 @@ class IngredientesActivity : AppCompatActivity() {
 
                     val menuIcon =
                         view.findViewById<androidx.cardview.widget.CardView>(R.id.cv_nota)
-                    showPopupMenu(menuIcon, position, lista.keys.elementAt(position))
+                    showPopupMenu(menuIcon, position, ingredientes?.elementAt(position)?.nombre!!)
                 }
             } else {
                 val tv_exep = findViewById<TextView>(R.id.tv_exep)
@@ -75,25 +72,25 @@ class IngredientesActivity : AppCompatActivity() {
 
         }
     }
-    fun showPopupMenu(view: View, position: Int, key : Int) {
+    fun showPopupMenu(view: View, position: Int, nombre : String) {
         val popupMenu = PopupMenu(this, view)
         popupMenu.inflate(R.menu.menu_ingredientes)
 
         popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
                 R.id.opc1-> {
-                    Toast.makeText(this, "Ingrediente agregado", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Funcionalidad en proceso", Toast.LENGTH_SHORT).show()
                     true
                 }
 
                 R.id.opc2 -> {
-                    receta?.ingredientes?.removeAt(position)
+                    val key = EBaseDatos.tablaIngrediente?.obtenerIdIngrediente(nombre)
+                    EBaseDatos.tablaIngrediente?.eliminarIngrediente(key)
                     val intend = Intent(this, MainActivity::class.java)
                     startActivity(intend)
                     Toast.makeText(this, "Ingrediente Eliminado", Toast.LENGTH_SHORT).show()
                     true
                 }
-
                 else -> false
             }
         }

@@ -9,7 +9,7 @@ import com.example.examen.models.Receta
 
 
 class SqliteHelperIngrediente (contexto : Context?,):
-    SQLiteOpenHelper(contexto, "moviles", null, 2){
+    SQLiteOpenHelper(contexto, "dbIngrediente", null, 1){
 
 
         override fun onCreate(db: SQLiteDatabase?) {
@@ -37,55 +37,8 @@ class SqliteHelperIngrediente (contexto : Context?,):
             db?.execSQL(scriptSQLCrearTablaRecetaIngrediente)
         }
 
-    override fun onDowngrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        super.onDowngrade(db, oldVersion, newVersion)
-        val scriptSQLCrearTablaIngrediente = """
-            CREATE TABLE INGREDIENTE (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nombre TEXT NOT NULL,
-                esImportado INTEGER,
-                precioPorKilo REAL NOT NULL,
-                fechaCaducidad TEXT NOT NULL,
-                caloriasPorKilo INTEGER NOT NULL
-            )
-        """.trimIndent()
-
-        val scriptSQLCrearTablaRecetaIngrediente = """
-            CREATE TABLE RECETA_INGREDIENTE (
-                receta_id INTEGER,
-                ingrediente_id INTEGER,
-                FOREIGN KEY (receta_id) REFERENCES Receta(id),
-                FOREIGN KEY (ingrediente_id) REFERENCES Ingrediente(id)  
-            )
-        """.trimIndent()
-
-        db?.execSQL(scriptSQLCrearTablaIngrediente)
-        db?.execSQL(scriptSQLCrearTablaRecetaIngrediente)
-    }
-
         override fun onUpgrade(db: SQLiteDatabase?, oldversion: Int, newversion: Int) {
-            val scriptSQLCrearTablaIngrediente = """
-            CREATE TABLE INGREDIENTE (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nombre TEXT NOT NULL,
-                esImportado INTEGER,
-                precioPorKilo REAL NOT NULL,
-                fechaCaducidad TEXT NOT NULL,
-                caloriasPorKilo INTEGER NOT NULL
-            )
-        """.trimIndent()
-
-            val scriptSQLCrearTablaRecetaIngrediente = """
-            CREATE TABLE RECETA_INGREDIENTE (
-                receta_id INTEGER,
-                ingrediente_id INTEGER,
-                FOREIGN KEY (receta_id) REFERENCES Receta(id),
-                FOREIGN KEY (ingrediente_id) REFERENCES Ingrediente(id)  
-            )
-        """.trimIndent()
-
-            db?.execSQL(scriptSQLCrearTablaIngrediente)
-            db?.execSQL(scriptSQLCrearTablaRecetaIngrediente)
+            // TODO:  
         }
 
         fun crearIngrediente(
@@ -117,12 +70,16 @@ class SqliteHelperIngrediente (contexto : Context?,):
         }
 
         fun eliminarIngrediente(
-            nombre : String?
+            receta_id : Int?
         ) : Boolean {
             val conexionEscritura = writableDatabase
-            val parametrosConsultaDelete = arrayOf(nombre.toString())
+            val parametrosConsultaDelete = arrayOf(receta_id.toString())
+            val parametrosConsultaExtra = arrayOf(receta_id.toString())
+            val prueba = conexionEscritura.delete(
+                "RECETA_INGREDIENTE", "receta_id=?", parametrosConsultaExtra
+            )
             val resultadoEliminacion = conexionEscritura.delete(
-                "INGREDIENTE", "nombre=?", parametrosConsultaDelete
+                "INGREDIENTE", "id=?", parametrosConsultaDelete
             )
 
             writableDatabase.close()
@@ -184,6 +141,17 @@ class SqliteHelperIngrediente (contexto : Context?,):
         baseDatosLectura.close()
 
         return mapaIngredientes.values.toMutableList()
+    }
+
+    fun obtenerIdIngrediente(nombre: String): Int? {
+        val baseDatosLectura = this.readableDatabase
+        val scriptConsultaRecetas = "SELECT * FROM Ingrediente WHERE nombre=?"
+        val argsQuery = arrayOf(nombre.toString())
+        val id = baseDatosLectura.rawQuery(scriptConsultaRecetas, argsQuery)
+
+        id.moveToPosition(0)
+        baseDatosLectura.close()
+        return id.getInt(0)
     }
 
 }
