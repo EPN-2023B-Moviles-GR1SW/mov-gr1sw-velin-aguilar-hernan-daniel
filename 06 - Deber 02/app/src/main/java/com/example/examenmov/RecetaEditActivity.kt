@@ -3,11 +3,9 @@ package com.example.examenmov
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Toast
-import com.example.examen.models.ManejadorReceta
 import com.google.android.material.textfield.TextInputEditText
 import java.lang.Exception
 import java.util.Date
@@ -34,7 +32,7 @@ class RecetaEditActivity : AppCompatActivity() {
         btnEditar.setOnClickListener {
             if(verificarDatos()){
                 try {
-                    EBaseDatos.tablaEntrenador!!.actualizarReceta(inputNombre.text.toString(),
+                    EBaseDatos.tablaReceta!!.actualizarReceta(inputNombre.text.toString(),
                        platoTemporada, inputPrecio.text.toString().toFloat(), Date().toString()
                         , inputPorciones.text.toString().toInt(), key)
                 }catch (e: Exception){
@@ -56,7 +54,7 @@ class RecetaEditActivity : AppCompatActivity() {
         inputPorciones = findViewById(R.id.input_porciones)
         inputDiaCum = findViewById(R.id.input_agregacion)
 
-        val lista = EBaseDatos.tablaEntrenador!!.consultarRecetas()
+        val lista = EBaseDatos.tablaReceta!!.consultarRecetas()
         inputNombre.setText(lista.values.elementAt(id)!!.nombre)
         inputPrecio.setText(lista.values.elementAt(id)!!.precio.toString())
         lista.values.elementAt(id)!!.esPlatoTemporada?.let { inputPlatoTemporada.isChecked }

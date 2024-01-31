@@ -12,10 +12,6 @@ public class ManejadorReceta {
 
         init {
             cargarDatos()
-            //agregarReceta("Salmon",10.2F, 145)
-            //agregarReceta("Queso",3.4F, 145)
-            //listaRecetas[1]?.agregarIngrediente("Pan",5.2, 145, false)
-
         }
         fun obtenerLista(): MutableMap<Int, Receta> {
             return listaRecetas

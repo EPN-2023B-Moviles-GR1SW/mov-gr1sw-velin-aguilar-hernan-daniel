@@ -2,6 +2,7 @@ package com.example.examenmov
 
 class EBaseDatos {
     companion object{
-        var tablaEntrenador : SqliteHelperReceta? = null
+        var tablaReceta : SqliteHelperReceta? = null
+        var tablaIngrediente : SqliteHelperIngrediente? = null
     }
 }

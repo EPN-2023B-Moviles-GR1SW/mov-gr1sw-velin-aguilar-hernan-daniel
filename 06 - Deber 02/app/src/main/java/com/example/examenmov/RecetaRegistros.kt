@@ -3,12 +3,10 @@ package com.example.examenmov
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
-import com.example.examen.models.ManejadorReceta
 import com.google.android.material.textfield.TextInputEditText
 
 class RecetaRegistros : AppCompatActivity() {
@@ -35,7 +33,7 @@ class RecetaRegistros : AppCompatActivity() {
 
                 var temporada = 0
                 if(esPlatoTemporada.isChecked) temporada = 1
-                val respuesta = EBaseDatos.tablaEntrenador!!.crearReceta(
+                val respuesta = EBaseDatos.tablaReceta!!.crearReceta(
                     nombre.text.toString(),
                     temporada,
                     precio.text.toString().toFloat(),
@@ -43,7 +41,6 @@ class RecetaRegistros : AppCompatActivity() {
                     porciones.text.toString().toInt()
                 )
 
-                //ManejadorReceta.agregarReceta(inputNombre.text.toString(),inputApellido.text.toString().toFloat())
                 if(respuesta) Toast.makeText(this, "Receta Creada", Toast.LENGTH_SHORT).show()
                 val intend = Intent(this, MainActivity::class.java)
                 startActivity(intend)

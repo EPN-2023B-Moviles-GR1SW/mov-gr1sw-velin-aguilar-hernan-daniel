@@ -6,19 +6,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import android.widget.PopupMenu
 import android.widget.Toast
 import com.example.examen.models.CustomBaseAdapter
-import com.example.examen.models.ManejadorReceta
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        EBaseDatos.tablaEntrenador = SqliteHelperReceta(this)
+        EBaseDatos.tablaReceta = SqliteHelperReceta(this)
+        EBaseDatos.tablaIngrediente = SqliteHelperIngrediente(this)
         setContentView(R.layout.activity_main)
         initProgram()
 
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initProgram() {
-        val lista = EBaseDatos.tablaEntrenador!!.consultarRecetas()
+        val lista = EBaseDatos.tablaReceta!!.consultarRecetas()
         val miadapter = CustomBaseAdapter(this,lista)
         val lv1 = findViewById<ListView>(R.id.lv_est)
         lv1.adapter = miadapter
@@ -62,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                     val intend = Intent(this, RecetaEditActivity::class.java)
                     Log.i("iddd", position.toString())
                     intend.putExtra("id", position)
-                    intend.putExtra("key", EBaseDatos.tablaEntrenador?.consultarRecetas()?.keys?.elementAt(position))
+                    intend.putExtra("key", EBaseDatos.tablaReceta?.consultarRecetas()?.keys?.elementAt(position))
                     startActivity(intend)
                     true
                 }
@@ -70,12 +69,13 @@ class MainActivity : AppCompatActivity() {
                     val intend = Intent(this, IngredientesActivity::class.java)
                     Log.i("iddd", position.toString())
                     intend.putExtra("id", position)
+                    intend.putExtra("key", EBaseDatos.tablaReceta?.consultarRecetas()?.keys?.elementAt(position))
                     startActivity(intend)
                     true
                 }
                 R.id.opcion3 -> {
                     val intend = Intent(this, MainActivity::class.java)
-                    EBaseDatos.tablaEntrenador!!.eliminarReceta(nombre)
+                    EBaseDatos.tablaReceta!!.eliminarReceta(nombre)
                     Toast.makeText(this, "Receta Eliminada", Toast.LENGTH_SHORT).show()
                     startActivity(intend)
                     miadapter.notifyDataSetChanged()

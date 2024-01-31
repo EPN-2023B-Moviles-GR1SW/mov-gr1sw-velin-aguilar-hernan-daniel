@@ -9,7 +9,7 @@ import java.util.Date
 
 
 class SqliteHelperReceta (contexto : Context?,):
-    SQLiteOpenHelper(contexto, "moviles", null, 1){
+    SQLiteOpenHelper(contexto, "moviles", null, 2){
 
 
         override fun onCreate(db: SQLiteDatabase?) {

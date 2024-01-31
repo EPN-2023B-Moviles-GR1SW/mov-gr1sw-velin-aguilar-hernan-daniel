@@ -19,8 +19,6 @@ class CrearIngredienteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrar_ingrediente)
 
-
-
         val btnCrear = findViewById<Button>(R.id.btn_crear_nota)
         obtenerDatos()
         btnCrear.setOnClickListener {
@@ -37,9 +35,10 @@ class CrearIngredienteActivity : AppCompatActivity() {
         inputIngredienteImportado = findViewById(R.id.cb_ingrediente_importado)
     }
     fun logicaCrear(){
-        val id: Int = intent.extras?.getInt("id")!!
+        val id : Int = intent.extras?.getInt("id")!!
+        val key : Int = intent.extras?.getInt("key")!!
 
-        val lista = ManejadorReceta.obtenerLista()
+        val lista = EBaseDatos.tablaReceta!!.consultarRecetas()
 
         val inputNota:String = inputValor.text.toString()
         var precio: Double = 0.0
@@ -53,7 +52,12 @@ class CrearIngredienteActivity : AppCompatActivity() {
             precio= inputNota.toDoubleOrNull()!!
             codMat = cod.toInt()
             if (precio != null) {
-                lista[id]?.agregarIngrediente(nombre, precio, codMat, importado)
+                lista.values.elementAt(id).agregarIngrediente(nombre, precio, codMat, importado)
+                var valImportado = 0
+                if(importado) valImportado = 1
+                EBaseDatos.tablaIngrediente?.crearIngrediente(nombre, valImportado, precio.toFloat(),
+                    "", codMat, key)!!
+
                 Toast.makeText(this," Ingrediente Creado", Toast.LENGTH_SHORT).show()
                 val intend = Intent(this, MainActivity::class.java)
                 startActivity(intend)
