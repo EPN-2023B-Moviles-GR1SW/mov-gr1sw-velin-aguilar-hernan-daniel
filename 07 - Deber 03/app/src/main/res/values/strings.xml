@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Prime Video</string>
+    <string name="title_activity_busqueda">BusquedaActivity</string>
+    <string name="title_activity_descargas">DescargasActivity</string>
+</resources>
