@@ -2,23 +2,95 @@ package com.example.examenmov
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.examenmov.ui.theme.ExamenMovTheme
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BusquedaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_busqueda)
+
+        val programsList = listOf(
+                Program(
+                    id = "1",
+                    imageUrl = R.drawable.dragonballz,
+                    title = "Interstellar",
+                    description = "Un equipo de exploradores viaja a través de un agujero de gusano en el espacio en un intento de asegurar la supervivencia de la humanidad.",
+                    rating = 8.6,
+                    genre = "Ciencia ficción",
+                    anio = 2010
+                ),
+                Program(
+                    id = "2",
+                    imageUrl = R.drawable.xfiles,
+                    title = "El origen",
+                    description = "Un ladrón que roba secretos corporativos a través del uso de la tecnología de compartir sueños, se le da la tarea inversa de plantar una idea en la mente de un director ejecutivo.",
+                    rating = 8.8,
+                    genre = "Acción",
+                    anio = 2010
+                ),
+                Program(
+                    id = "3",
+                    imageUrl = R.drawable.naruto,
+                    title = "El origen",
+                    description = "Un ladrón que roba secretos corporativos a través del uso de la tecnología de compartir sueños, se le da la tarea inversa de plantar una idea en la mente de un director ejecutivo.",
+                    rating = 8.8,
+                    genre = "Acción",
+                    anio = 2010
+                ),
+                Program(
+                    id = "4",
+                    imageUrl = R.drawable.invincible,
+                    title = "El origen",
+                    description = "Un ladrón que roba secretos corporativos a través del uso de la tecnología de compartir sueños, se le da la tarea inversa de plantar una idea en la mente de un director ejecutivo.",
+                    rating = 8.8,
+                    genre = "Acción",
+                    anio = 2010
+                ),
+                Program(
+                    id = "5",
+                    imageUrl = R.drawable.detectivepikachu,
+                    title = "El origen",
+                    description = "Un ladrón que roba secretos corporativos a través del uso de la tecnología de compartir sueños, se le da la tarea inversa de plantar una idea en la mente de un director ejecutivo.",
+                    rating = 8.8,
+                    genre = "Acción",
+                    anio = 2010
+                ),
+            Program(
+                id = "5",
+                imageUrl = R.drawable.her,
+                title = "El origen",
+                description = "Un ladrón que roba secretos corporativos a través del uso de la tecnología de compartir sueños, se le da la tarea inversa de plantar una idea en la mente de un director ejecutivo.",
+                rating = 8.8,
+                genre = "Acción",
+                anio = 2010
+            ),
+            Program(
+                id = "5",
+                imageUrl = R.drawable.laniebla,
+                title = "El origen",
+                description = "Un ladrón que roba secretos corporativos a través del uso de la tecnología de compartir sueños, se le da la tarea inversa de plantar una idea en la mente de un director ejecutivo.",
+                rating = 8.8,
+                genre = "Acción",
+                anio = 2010
+            ),
+            Program(
+                id = "5",
+                imageUrl = R.drawable.sinlimites,
+                title = "El origen",
+                description = "Un ladrón que roba secretos corporativos a través del uso de la tecnología de compartir sueños, se le da la tarea inversa de plantar una idea en la mente de un director ejecutivo.",
+                rating = 8.8,
+                genre = "Acción",
+                anio = 2010
+            )
+            )
+
+        val recyclerView: RecyclerView = findViewById(R.id.programsRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = BusquedaProgramAdapter(programsList)
 
         val navView: BottomNavigationView = findViewById(R.id.bottom_navigation)
         navView.setOnNavigationItemSelectedListener { item ->

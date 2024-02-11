@@ -6,7 +6,8 @@ class Program(
     val title: String,
     val description: String,
     val rating: Double,
-    val genre: String
+    val genre: String,
+    val anio : Int
 ){
 
 }

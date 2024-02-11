@@ -1,16 +1,9 @@
 package com.example.examenmov
 
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.view.Menu
-import android.view.MenuItem
-import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,9 +17,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val images = listOf(
-            R.drawable.gunter,
+            R.drawable.contagion2,
             R.drawable.xfiles,
-            R.drawable.proyectox
+            R.drawable.barbie
         )
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -66,7 +59,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Interstellar",
                         description = "Un equipo de exploradores viaja a través de un agujero de gusano en el espacio en un intento de asegurar la supervivencia de la humanidad.",
                         rating = 8.6,
-                        genre = "Ciencia ficción"
+                        genre = "Ciencia ficción",
+                        anio = 2010
                     ),
                     Program(
                         id = "2",
@@ -74,7 +68,8 @@ class MainActivity : AppCompatActivity() {
                         title = "El origen",
                         description = "Un ladrón que roba secretos corporativos a través del uso de la tecnología de compartir sueños, se le da la tarea inversa de plantar una idea en la mente de un director ejecutivo.",
                         rating = 8.8,
-                        genre = "Acción"
+                        genre = "Acción",
+                        anio = 2010
                     ),
                     Program(
                         id = "3",
@@ -82,7 +77,8 @@ class MainActivity : AppCompatActivity() {
                         title = "El origen",
                         description = "Un ladrón que roba secretos corporativos a través del uso de la tecnología de compartir sueños, se le da la tarea inversa de plantar una idea en la mente de un director ejecutivo.",
                         rating = 8.8,
-                        genre = "Acción"
+                        genre = "Acción",
+                        anio = 2010
                     ),
                     Program(
                         id = "4",
@@ -90,7 +86,8 @@ class MainActivity : AppCompatActivity() {
                         title = "El origen",
                         description = "Un ladrón que roba secretos corporativos a través del uso de la tecnología de compartir sueños, se le da la tarea inversa de plantar una idea en la mente de un director ejecutivo.",
                         rating = 8.8,
-                        genre = "Acción"
+                        genre = "Acción",
+                        anio = 2010
                     ),
                     Program(
                         id = "5",
@@ -98,7 +95,8 @@ class MainActivity : AppCompatActivity() {
                         title = "El origen",
                         description = "Un ladrón que roba secretos corporativos a través del uso de la tecnología de compartir sueños, se le da la tarea inversa de plantar una idea en la mente de un director ejecutivo.",
                         rating = 8.8,
-                        genre = "Acción"
+                        genre = "Acción",
+                        anio = 2010
                     )
                 )
             ),
@@ -111,7 +109,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "2",
@@ -119,7 +118,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "3",
@@ -127,7 +127,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "4",
@@ -135,7 +136,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "5",
@@ -143,7 +145,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     )
                 )
             ),
@@ -156,7 +159,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "2",
@@ -164,7 +168,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "3",
@@ -172,7 +177,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "4",
@@ -180,7 +186,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "5",
@@ -188,7 +195,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     )
                 )
             ),
@@ -201,7 +209,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "2",
@@ -209,7 +218,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "3",
@@ -217,7 +227,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "4",
@@ -225,7 +236,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "5",
@@ -233,7 +245,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     )
                 )
             ),
@@ -246,7 +259,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "2",
@@ -254,7 +268,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "3",
@@ -262,7 +277,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "4",
@@ -270,7 +286,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     ),
                     Program(
                         id = "5",
@@ -278,7 +295,8 @@ class MainActivity : AppCompatActivity() {
                         title = "Stranger Things",
                         description = "Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales aterradoras y una niña extraña.",
                         rating = 8.7,
-                        genre = "Terror"
+                        genre = "Terror",
+                        anio = 2010
                     )
                 )
             )
