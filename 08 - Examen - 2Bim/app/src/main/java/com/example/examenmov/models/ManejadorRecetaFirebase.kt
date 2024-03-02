@@ -1,12 +1,9 @@
 package com.example.examen.models
 
 import com.google.firebase.firestore.FirebaseFirestore
-import java.io.FileInputStream
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
-import java.io.ObjectInputStream
-import java.io.ObjectOutputStream
-import java.util.Date
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 public class ManejadorRecetaFirebase {
     companion object {
@@ -45,17 +42,65 @@ public class ManejadorRecetaFirebase {
                 }
         }
 
+        fun eliminarIngrediente(idReceta: String, nombreIngrediente: String) {
+            db.collection("recetas").document(idReceta).collection("ingredientes")
+                .whereEqualTo("nombre", nombreIngrediente)
+                .get()
+                .addOnSuccessListener { documentos ->
+                    if (documentos.isEmpty) {
+                        println("No se encontró el ingrediente con nombre: $nombreIngrediente")
+                        return@addOnSuccessListener
+                    }
+
+                    for (documento in documentos) {
+                        db.collection("recetas").document(idReceta).collection("ingredientes").document(documento.id)
+                            .delete()
+                            .addOnSuccessListener {
+                                println("Ingrediente $nombreIngrediente eliminado correctamente")
+                            }
+                            .addOnFailureListener { e ->
+                                println("Error eliminando ingrediente: $nombreIngrediente, $e")
+                            }
+                    }
+                }
+                .addOnFailureListener { e ->
+                    println("Error buscando ingrediente $nombreIngrediente para eliminar: $e")
+                }
+        }
+
+
         fun eliminarReceta(nombreReceta: String) {
             db.collection("recetas")
                 .whereEqualTo("nombre", nombreReceta)
                 .get()
                 .addOnSuccessListener { documentos ->
                     for (documento in documentos) {
+                        var idDocumento = documento.id
                         db.collection("recetas").document(documento.id)
                             .delete()
                             .addOnSuccessListener {
                                 listaRecetas.remove(documento.id)
                                 println("Receta eliminada correctamente")
+                                db.collection("recetas").document(documento.id).collection("ingredientes")
+                                    .get()
+                                    .addOnSuccessListener { ingredientesReceta ->
+                                        for (ingrediente in ingredientesReceta) {
+                                            db.collection("recetas").document(documento.id).collection("ingredientes").document(ingrediente.id)
+                                                .delete()
+                                                .addOnSuccessListener {
+                                                    println("Documento ${ingrediente.id} eliminado correctamente")
+                                                }
+                                                .addOnFailureListener { e ->
+                                                    println("Error eliminando documento: ${ingrediente.id}, $e")
+                                                }
+                                        }
+                                        if (ingredientesReceta.isEmpty) {
+                                            println("La subcolección está vacía o no existe.")
+                                        }
+                                    }
+                                    .addOnFailureListener { e ->
+                                        println("Error al buscar documentos para eliminar en la subcolección: $e")
+                                    }
                             }
                             .addOnFailureListener { e ->
                                 println("Error eliminando receta: $e")
@@ -70,7 +115,7 @@ public class ManejadorRecetaFirebase {
                 }
         }
 
-        fun obtenerLista(): MutableMap<String, Receta>{
+        fun obtenerListaRecetas(): MutableMap<String, Receta>{
             println("Iniciando lectura de documentos...")
             db.collection("recetas")
                 .get()
@@ -78,6 +123,7 @@ public class ManejadorRecetaFirebase {
                     for (document in result) {
                         try {
                             val receta = document.toObject(Receta::class.java)
+                            //receta.ingredientes = document;
                             listaRecetas[document.id] = receta
                         } catch (e: Exception) {
                             println("Error al convertir documento: ${document.id} a Receta")
@@ -90,12 +136,35 @@ public class ManejadorRecetaFirebase {
             return listaRecetas
         }
 
-        fun editarReceta(
-            idReceta: String,
-            nuevoNombre: String? = null,
-            nuevoPrecio: Float? = null,
-        ) {
+        suspend fun obtenerListaIngredientes(id: String): MutableList<Ingrediente>? = withContext(
+            Dispatchers.IO) {
+            val listaIngredientes: MutableList<Ingrediente> = mutableListOf()
+            try {
+                val result = db.collection("recetas").document(id).collection("ingredientes").get().await()
+                for (document in result) {
+                    val ingrediente = document.toObject(Ingrediente::class.java)
+                    listaIngredientes.add(ingrediente)
+                }
+            } catch (e: Exception) {
+                println("Error al obtener documentos: $e")
+            }
+            listaIngredientes
+        }
 
+        fun agregarIngrediente(id : String, nombre: String, precioPorKilo: Double,
+                               caloriasPorKilo : Int, importado : Boolean){
+            val nuevoIngrediente = Ingrediente(precioPorKilo, nombre ,caloriasPorKilo, importado)
+            db.collection("recetas").document(id).collection("ingredientes")
+                .add(nuevoIngrediente)
+                .addOnSuccessListener { documentReference ->
+                    println("Ingrediente agregado con ID: ${documentReference.id}")
+                }
+                .addOnFailureListener { e ->
+                    println("Error agregando receta: $e")
+                }
+        }
+
+        fun editarReceta(idReceta: String, nuevoNombre: String? = null, nuevoPrecio: Float? = null, ) {
             db.collection("recetas").document(idReceta)
                 .update(
                     mapOf(
@@ -104,8 +173,6 @@ public class ManejadorRecetaFirebase {
                     )
                 )
                 .addOnSuccessListener {
-                    println("Receta actualizada correctamente en Firestore.")
-                    // Opcionalmente, actualiza tu caché local si lo necesitas
                     listaRecetas[idReceta]?.apply {
                         nuevoNombre?.let { nombre = it }
                         nuevoPrecio?.let { precio = it }

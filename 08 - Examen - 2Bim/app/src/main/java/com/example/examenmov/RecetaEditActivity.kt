@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Toast
-import com.example.examen.models.ManejadorReceta
 import com.example.examen.models.ManejadorRecetaFirebase
 import com.example.examen.models.Receta
 import com.google.android.material.textfield.TextInputEditText
@@ -21,7 +20,6 @@ class RecetaEditActivity : AppCompatActivity() {
     lateinit var inputDiaCum: TextInputEditText
 
     var id: String = ""
-    var modo : Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editar_receta)
@@ -57,7 +55,7 @@ class RecetaEditActivity : AppCompatActivity() {
         inputPorciones = findViewById(R.id.input_porciones)
         inputDiaCum = findViewById(R.id.input_agregacion)
 
-        val lista = ManejadorRecetaFirebase.obtenerLista()
+        val lista = ManejadorRecetaFirebase.obtenerListaRecetas()
 
         var objetoEditar : Receta? = lista.values.firstOrNull { receta -> receta.nombre == id}
         var idRetorno : String? = lista.keys.firstOrNull { receta -> lista.get(receta)?.nombre == id}

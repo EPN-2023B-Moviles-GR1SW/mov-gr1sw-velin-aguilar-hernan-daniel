@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Toast
-import com.example.examen.models.ManejadorReceta
+import com.example.examen.models.ManejadorRecetaFirebase
 import com.google.android.material.textfield.TextInputEditText
 
 class CrearIngredienteActivity : AppCompatActivity() {
@@ -19,15 +19,11 @@ class CrearIngredienteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrar_ingrediente)
 
-
-
         val btnCrear = findViewById<Button>(R.id.btn_crear_nota)
         obtenerDatos()
         btnCrear.setOnClickListener {
             logicaCrear()
         }
-
-
     }
 
     fun obtenerDatos(){
@@ -37,9 +33,7 @@ class CrearIngredienteActivity : AppCompatActivity() {
         inputIngredienteImportado = findViewById(R.id.cb_ingrediente_importado)
     }
     fun logicaCrear(){
-        val id: Int = intent.extras?.getInt("id")!!
-
-        val lista = ManejadorReceta.obtenerLista()
+        val id: String = intent.extras?.getString("id")!!
 
         val inputNota:String = inputValor.text.toString()
         var precio: Double = 0.0
@@ -53,7 +47,7 @@ class CrearIngredienteActivity : AppCompatActivity() {
             precio= inputNota.toDoubleOrNull()!!
             codMat = cod.toInt()
             if (precio != null) {
-                lista[id]?.agregarIngrediente(nombre, precio, codMat, importado)
+                ManejadorRecetaFirebase.agregarIngrediente(id, nombre, precio, codMat, importado)
                 Toast.makeText(this," Ingrediente Creado", Toast.LENGTH_SHORT).show()
                 val intend = Intent(this, MainActivity::class.java)
                 startActivity(intend)

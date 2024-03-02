@@ -3,7 +3,6 @@ package com.example.examenmov
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -19,7 +18,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initProgram()
-
     }
 
     override fun onResume() {
@@ -29,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     fun initProgram() {
 
-        val listaExtra = ManejadorRecetaFirebase.obtenerLista()
+        val listaExtra = ManejadorRecetaFirebase.obtenerListaRecetas()
         val transformedMap: MutableMap<Int, Receta> = listaExtra.entries.foldIndexed(mutableMapOf()) { index, acc, entry ->
             acc[index] = entry.value
             acc
@@ -39,10 +37,8 @@ class MainActivity : AppCompatActivity() {
         lv1.adapter = miadapter
 
         lv1.setOnItemClickListener { _, view, position, _ ->
-            // Obtén la vista del ícono del menú
-            print(position)
+
             val menuIcon = view.findViewById<androidx.cardview.widget.CardView>(R.id.cv_item)
-            // Muestra el menú contextual
             showPopupMenu(menuIcon, position, miadapter, transformedMap[position]?.nombre)
         }
         val btnCrearReceta = findViewById<Button>(R.id.btn_crear_nuevo)
@@ -72,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.opcion2 -> {
                     val intend = Intent(this, IngredientesActivity::class.java)
-                    intend.putExtra("id", position)
+                    intend.putExtra("id", nombre)
                     startActivity(intend)
                     true
                 }

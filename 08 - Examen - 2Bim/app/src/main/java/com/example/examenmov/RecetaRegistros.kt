@@ -32,7 +32,7 @@ class RecetaRegistros : AppCompatActivity() {
                     ManejadorRecetaFirebase.agregarReceta(inputNombre.text.toString(),inputApellido.text.toString().toFloat())
                     Toast.makeText(this, "Receta Creada con éxito", Toast.LENGTH_SHORT).show()
                 }
-                //Toast.makeText(this, "Receta Creada", Toast.LENGTH_SHORT).show()
+
                 val intend = Intent(this, MainActivity::class.java)
                 startActivity(intend)
             }else{
