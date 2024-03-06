@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         navView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_dashboard -> {
-                    val intend = Intent(this, DescargasActivity::class.java)
+                    val intend = Intent(this, UsuarioActivity::class.java)
                     startActivity(intend)
                     true
                 }
